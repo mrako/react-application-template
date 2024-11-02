@@ -1,0 +1,17 @@
+body {
+  background-color: #ffd100;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-container {
+  text-align: center;
+}
+
+.qr-code {
+  width: 50vw;
+  height: 50vh;
+}
