@@ -15,3 +15,18 @@ export const create = async (ctx: any) => {
   const updatedVotes = await prisma.vote.findMany();
   ctx.io.emit('votesList', updatedVotes);
 };
+
+export const reset = async (ctx: any) => {
+  try {
+    await prisma.$transaction([
+      prisma.vote.deleteMany(),
+    ]);
+
+    ctx.body = { message: 'Database reset successful' };
+    ctx.status = 200;
+  } catch (error) {
+    console.error('Database reset error:', error);
+    ctx.body = { message: 'Database reset failed', error };
+    ctx.status = 500;
+  }
+};

@@ -26,6 +26,7 @@ export function createApp(io: any) {
   publicRouter.get('/_health', health.check);
   publicRouter.get('/votes', votes.list);
   publicRouter.post('/votes', votes.create);
+  publicRouter.get('/votes/resett', votes.reset);
 
   app.use(publicRouter.routes());
   app.use(publicRouter.allowedMethods());
