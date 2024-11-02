@@ -1,0 +1,39 @@
+.voting-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.voting-title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.voting-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vote-button {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.vote-button:hover {
+  background-color: #555;
+}
+
+.vote-button:active {
+  background-color: #111;
+}

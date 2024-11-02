@@ -9,5 +9,5 @@ generator client {
 
 model Vote {
   id         Int     @id @default(autoincrement())
-  option     Int
+  option     String
 }
