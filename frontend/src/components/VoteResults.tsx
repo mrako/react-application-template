@@ -12,7 +12,7 @@ const VoteResults: React.FC = () => {
   const [votes, setVotes] = useState<Vote[]>([]);
 
   useEffect(() => {
-    const socket = io(`${ENDPOINT}`);
+    const socket = io(`${ENDPOINT}`, { transports: ['websocket'] });
 
     // Listen for updates to the vote list
     socket.on('votesList', (data: Vote[]) => {
