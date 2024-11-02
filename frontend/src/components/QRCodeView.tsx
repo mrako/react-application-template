@@ -9,14 +9,16 @@ const QRCodeComponent = () => {
 
   return (
     <div className="qr-container">
-      <QRCodeSVG
-        value={currentDomain}
-        size={1200}
-        bgColor={"#ffd100"}
-        fgColor={"#010101"}
-        level={"L"}
-        className="qr-code"
-      />
+      <div className="qr-code-section">
+        <QRCodeSVG
+          value={currentDomain}
+          size={1200}
+          bgColor={"#ffd100"}
+          fgColor={"#010101"}
+          level={"L"}
+          className="qr-code"
+        />
+      </div>
     </div>
   );
 };

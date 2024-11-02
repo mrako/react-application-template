@@ -19,10 +19,10 @@ const VotingView: React.FC = () => {
 
   return (
     <div className="voting-container">
-      <h2 className="voting-title">Cast Your Vote</h2>
+      <h2 className="voting-title">Which one will make software development faster in three years?</h2>
       <div className="voting-buttons">
-        <button className="vote-button" onClick={() => handleVote('1')}>Vote for 1</button>
-        <button className="vote-button" onClick={() => handleVote('2')}>Vote for 2</button>
+        <button className="vote-button" onClick={() => handleVote('1')}>AI-driven Development</button>
+        <button className="vote-button" onClick={() => handleVote('2')}>Platform Engineering</button>
       </div>
     </div>
   );

@@ -1,17 +1,19 @@
-body {
-  background-color: #ffd100;
-  margin: 0;
+.qr-container {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
-.qr-container {
-  text-align: center;
+.qr-code-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
 }
 
 .qr-code {
-  width: 50vw;
-  height: 50vh;
+  width: 60vw;
+  height: 60vh;
 }
