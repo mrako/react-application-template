@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './VotingView.css';
 
+const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
+
 const VotingView: React.FC = () => {
   const navigate = useNavigate();
 
   const handleVote = async (option: string) => {
     try {
-      await axios.post('http://localhost:9000/api/votes', { option });
+      await axios.post(`${ENDPOINT}/api/votes`, { option });
       navigate('/results');
     } catch (error) {
       console.error('Error voting:', error);

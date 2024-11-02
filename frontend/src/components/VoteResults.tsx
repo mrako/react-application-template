@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
+const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
+
 interface Vote {
   id: number;
   option: string;
@@ -10,7 +12,7 @@ const VoteResults: React.FC = () => {
   const [votes, setVotes] = useState<Vote[]>([]);
 
   useEffect(() => {
-    const socket = io('http://localhost:9000');
+    const socket = io(`${ENDPOINT}`);
 
     // Listen for updates to the vote list
     socket.on('votesList', (data: Vote[]) => {
