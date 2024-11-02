@@ -36,20 +36,23 @@
 }
 
 .qr-code-container {
-  position: absolute;
-  bottom: 20px;
-  width: 20%;
-}
-
-.qr-code-container.option-one {
-  left: 20px;
-}
-
-.qr-code-container.option-two {
-  right: 20px;
+  margin-top: 8vh;
+  width: 40vh;
+  height: 40vh;
 }
 
 .results-qr-code {
   width: 100%;
   height: auto;
+}
+
+/* Mobile view: stack sections top and bottom */
+@media (max-width: 768px) {
+  .results-bar {
+    flex-direction: column; /* Stack sections vertically on smaller screens */
+  }
+
+  .qr-code-container {
+    display: none;
+  }
 }

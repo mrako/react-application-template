@@ -39,7 +39,7 @@ const VoteResults: React.FC = () => {
   const optionOnePercentage = totalVotes > 0 ? (voteCounts['1'] / totalVotes) * 100 : 50;
   const optionTwoPercentage = totalVotes > 0 ? (voteCounts['2'] / totalVotes) * 100 : 50;
 
-  const largerOption = optionOnePercentage > 30 ? 'option-one' : 'option-two';
+  const largerOption = optionOnePercentage > 70;
 
   return (
     <div className="results-container">
@@ -50,6 +50,19 @@ const VoteResults: React.FC = () => {
         >
           <h3>AI-driven Development</h3>
           <p>{optionOnePercentage.toFixed(1)}% ({voteCounts['1'] || 0} votes)</p>
+
+            <div className={`qr-code-container`}>
+          {largerOption &&
+              <QRCodeSVG
+                value={rootDomain}
+                size={400}
+                bgColor={"#ffd100"}
+                fgColor={"#010101"}
+                level={"L"}
+                className="results-qr-code"
+              />
+          }
+            </div>
         </div>
 
         <div
@@ -58,18 +71,20 @@ const VoteResults: React.FC = () => {
         >
           <h3>Platform Engineering</h3>
           <p>{optionTwoPercentage.toFixed(1)}% ({voteCounts['2'] || 0} votes)</p>
-        </div>
-      </div>
 
-      <div className={`qr-code-container ${largerOption}`}>
-        <QRCodeSVG
-          value={rootDomain}
-          size={400}
-          bgColor={largerOption ? "#ffd100" : "#010101"}
-          fgColor={largerOption ? "#010101" : "#ffd100"}
-          level={"L"}
-          className="results-qr-code"
-        />
+            <div className={`qr-code-container`}>
+          {!largerOption &&
+              <QRCodeSVG
+                value={rootDomain}
+                size={400}
+                bgColor={"#010101"}
+                fgColor={"#ffffff"}
+                level={"L"}
+                className="results-qr-code"
+              />
+        }
+            </div>
+        </div>
       </div>
     </div>
   );
