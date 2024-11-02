@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import http from 'http';
 import { Server } from 'socket.io';
 
@@ -6,42 +5,61 @@ import { createApp } from './src/app';
 import * as sockets from './src/sockets';
 
 import { prisma } from './src/prisma';
+import { createClient } from 'redis';
+import { createAdapter } from '@socket.io/redis-adapter';
 
 const port = process.env.PORT || 9000;
+const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 
-const server = http.createServer();
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000", // Allow requests from frontend origin
-    methods: ["GET", "POST"]
-  }
-});
-
-const app = createApp(io);
-server.on('request', app.callback());
-
-sockets.init(io.listen(server));
-
-const cleanResources = async (signal: any) => {
-  console.log(`Received ${signal}, closing connections.`);
-  try {
-    if (server) {
-      await server.close();
+async function initServer() {
+  const server = http.createServer();
+  const io = new Server(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"]
     }
+  });
 
-    await prisma.$disconnect();
-  } catch (error) {
-    console.log(`Error closing connection: ${error}.`);
-    process.exit(1);
-  }
-  process.exit(0);
-};
+  // Initialize Redis clients
+  const pubClient = createClient({ url: REDIS_URL });
+  const subClient = pubClient.duplicate();
 
-process.on('SIGINT', cleanResources);
-process.on('SIGTERM', cleanResources);
+  await pubClient.connect();
+  await subClient.connect();
 
-process.on('exit', () => console.log('Exiting.'));
+  // Apply the Redis adapter
+  io.adapter(createAdapter(pubClient, subClient));
 
-server.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  // Initialize the Koa app with io after Redis setup
+  const app = createApp(io);
+  server.on('request', app.callback());
+
+  sockets.init(io);
+
+  const cleanResources = async (signal: any) => {
+    console.log(`Received ${signal}, closing connections.`);
+    try {
+      await server.close();
+      await prisma.$disconnect();
+      await pubClient.disconnect();
+      await subClient.disconnect();
+    } catch (error) {
+      console.log(`Error closing connection: ${error}.`);
+      process.exit(1);
+    }
+    process.exit(0);
+  };
+
+  process.on('SIGINT', cleanResources);
+  process.on('SIGTERM', cleanResources);
+
+  process.on('exit', () => console.log('Exiting.'));
+
+  server.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+}
+
+initServer().catch((err) => {
+  console.error("Error starting server:", err);
 });
