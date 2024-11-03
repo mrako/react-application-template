@@ -35,24 +35,40 @@
   color: white;
 }
 
-.qr-code-container {
-  margin-top: 8vh;
-  width: 40vh;
-  height: 40vh;
-}
-
-.results-qr-code {
-  width: 100%;
-  height: auto;
-}
-
 /* Mobile view: stack sections top and bottom */
 @media (max-width: 768px) {
   .results-bar {
     flex-direction: column; /* Stack sections vertically on smaller screens */
   }
 
-  .qr-code-container {
+  .root-domain-banner {
     display: none;
   }
+}
+
+.root-domain-banner {
+  background-color: #ffd100;
+  color: black;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 5vh; /* Adds 5vh margin from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust to center */
+  width: 60%; /* Set width to 60% */
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Ensure the text overlaps the sides */
+.root-domain-banner span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
