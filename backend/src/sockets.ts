@@ -1,5 +1,3 @@
-/** WEBSOCKETS **/
-
 import { prisma } from './prisma';
 
 export const init = (io: any) => {
@@ -15,7 +13,7 @@ export const init = (io: any) => {
     socket.on('get votes', async (params: any, fn: any) => {
       try {
         fn(await prisma.vote.findMany());
-      } catch (err) {}
+      } catch (err) {} // tslint:disable-line:no-empty
     });
 
     socket.on('disconnect', () => {

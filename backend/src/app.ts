@@ -1,8 +1,8 @@
+import cors from 'kcors';
 import Koa from 'koa';
-import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
-import cors from 'kcors';
+import Router from 'koa-router';
 
 import * as health from './health';
 import * as votes from './votes';
@@ -21,7 +21,6 @@ export function createApp(io: any) {
     await next();
   });
 
-  /** API ROUTES **/
   const publicRouter = new Router({ prefix: '/api' });
 
   publicRouter.get('/_health', health.check);
