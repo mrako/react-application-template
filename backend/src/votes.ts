@@ -28,7 +28,7 @@ export const create = async (ctx: any) => {
   });
   ctx.body = newVote;
 
-  ctx.io.emit('votesList', countVotes());
+  ctx.io.emit('votesList', await countVotes());
 };
 
 export const reset = async (ctx: any) => {
