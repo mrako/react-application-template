@@ -1,5 +1,23 @@
 import { prisma } from './prisma';
 
+export const countVotes = async () => {
+  try {
+    const voteCounts = await prisma.vote.groupBy({
+      by: ['option'],
+      _count: {
+        option: true,
+      },
+    });
+
+    return voteCounts.reduce((acc: any, vote: any) => {
+      acc[vote.option] = vote._count.option;
+      return acc;
+    }, {});
+  } catch (error) {
+    console.error('Error fetching vote counts:', error);
+  }
+};
+
 export const list = async (ctx: any) => {
   const votes = await prisma.vote.findMany();
   ctx.body = votes;
@@ -12,8 +30,7 @@ export const create = async (ctx: any) => {
   });
   ctx.body = newVote;
 
-  const updatedVotes = await prisma.vote.findMany();
-  ctx.io.emit('votesList', updatedVotes);
+  ctx.io.emit('votesList', countVotes());
 };
 
 export const reset = async (ctx: any) => {
