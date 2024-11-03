@@ -14,5 +14,5 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: docker compose run backend npm run lint
-    - run: docker compose run backend npm db:migrate:reset
+    - run: docker compose run backend npm run db:migrate:reset
     - run: docker compose run backend npm test
