@@ -5,9 +5,7 @@ export const init = (io: any) => {
     console.log('a user connected');
 
     const emitVoteList = async () => {
-      const votesList = await countVotes();
-      console.log('votesList', votesList);
-      socket.emit('votesList', votesList);
+      socket.emit('votesList', await countVotes());
     };
 
     emitVoteList();

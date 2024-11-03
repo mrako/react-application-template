@@ -3,10 +3,8 @@ import { prisma } from './prisma';
 export const countVotes = async () => {
   try {
     const voteCounts = await prisma.vote.groupBy({
+      _count: { option: true },
       by: ['option'],
-      _count: {
-        option: true,
-      },
     });
 
     return voteCounts.reduce((acc: any, vote: any) => {
