@@ -35,17 +35,6 @@
   color: white;
 }
 
-/* Mobile view: stack sections top and bottom */
-@media (max-width: 768px) {
-  .results-bar {
-    flex-direction: column; /* Stack sections vertically on smaller screens */
-  }
-
-  .root-domain-banner {
-    display: none;
-  }
-}
-
 .root-domain-banner {
   background-color: #ffd100;
   color: #010101;
@@ -54,10 +43,10 @@
   text-align: center;
   padding: 20px;
   position: fixed;
-  bottom: 5vh; /* Adds 5vh margin from the bottom */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust to center */
-  width: 60%; /* Set width to 60% */
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   z-index: 999;
   display: flex;
   justify-content: center;
@@ -65,10 +54,20 @@
   overflow: hidden;
 }
 
-/* Ensure the text overlaps the sides */
 .root-domain-banner span {
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Mobile view: stack sections top and bottom */
+@media (max-width: 768px) {
+  .results-bar {
+    flex-direction: column;
+  }
+
+  .root-domain-banner {
+    display: none;
+  }
 }
