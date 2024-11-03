@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -13,6 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: docker-compose run backend npm run lint
-    - run: docker-compose run backend npm db:migrate:reset
-    - run: docker-compose run backend npm test
+    - run: docker compose run backend npm run lint
+    - run: docker compose run backend npm db:migrate:reset
+    - run: docker compose run backend npm test
