@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import { QRCodeSVG } from 'qrcode.react';
 
 import './VoteResults.css';
 
 const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
-
-interface Vote {
-  id: number;
-  option: string;
-}
 
 interface VoteCounts {
   [option: string]: number;
@@ -22,14 +16,10 @@ const VoteResults: React.FC = () => {
   useEffect(() => {
     const socket = io(`${ENDPOINT}`, { transports: ['websocket'] });
 
-    // Listen for updates to the vote list
     socket.on('votesList', (data: any) => {
-      console.log(data);
-
       setVoteCounts(data);
     });
 
-    // Clean up socket connection on unmount
     return () => {
       socket.disconnect();
     };
