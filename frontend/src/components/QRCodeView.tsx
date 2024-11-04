@@ -4,7 +4,6 @@ import { QRCodeSVG } from 'qrcode.react';
 import './QRCodeView.css';
 
 const QRCodeComponent = () => {
-  // Get the current domain
   const currentDomain = window.location.origin;
 
   return (
