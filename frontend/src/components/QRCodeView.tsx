@@ -13,7 +13,7 @@ const QRCodeComponent = () => {
           value={currentDomain}
           size={1200}
           bgColor={"#ffd100"}
-          fgColor={"#010101"}
+          fgColor={"#101820"}
           level={"L"}
           className="qr-code"
         />

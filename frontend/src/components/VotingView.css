@@ -12,7 +12,7 @@
 .voting-title {
   font-size: 2rem;
   margin-bottom: 48px;
-  color: #010101;
+  color: #101820;
 }
 
 .voting-buttons {
@@ -25,7 +25,7 @@
   padding: 12px 24px;
   font-size: 1.2rem;
   color: white;
-  background-color: #010101;
+  background-color: #101820;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -37,5 +37,5 @@
 }
 
 .vote-button:active {
-  background-color: #010101;
+  background-color: #101820;
 }
