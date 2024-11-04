@@ -7,6 +7,7 @@ primary_region = 'arn'
 [[services]]
   internal_port = 9000
   protocol = 'tcp'
+  min_machines_running = 1
 
   [services.concurrency]
     hard_limit = 25
