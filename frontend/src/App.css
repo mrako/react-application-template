@@ -1,5 +1,10 @@
+html {
+  height: -webkit-fill-available;
+}
+
 body {
   background-color: #ffd100;
+  min-height: -webkit-fill-available;
 }
 
 h3 {
