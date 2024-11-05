@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
+import { QRCodeSVG } from 'qrcode.react';
+
 import './VoteResults.css';
 
 const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
@@ -11,7 +13,7 @@ interface VoteCounts {
 
 const VoteResults: React.FC = () => {
   const [voteCounts, setVoteCounts] = useState<VoteCounts>({});
-  const rootDomain = window.location.origin.replace(/^https?:\/\//, '');
+  const currentDomain = window.location.origin;
 
   useEffect(() => {
     const socket = io(`${ENDPOINT}`, { transports: ['websocket'] });
@@ -31,6 +33,16 @@ const VoteResults: React.FC = () => {
 
   return (
     <div className="results-container">
+      <div className="voting-qr-code">
+        <QRCodeSVG
+          value={currentDomain}
+          size={1200}
+          bgColor={"#ffd100"}
+          fgColor={"#101820"}
+          level={"L"}
+          className="qr-code"
+        />
+      </div>
       <div className="results-bar">
         <div
           className="results-section option-one"
@@ -47,10 +59,6 @@ const VoteResults: React.FC = () => {
           <h3>Platform Engineering</h3>
           <p>{optionTwoPercentage.toFixed(1)}% ({voteCounts['2'] || 0} votes)</p>
         </div>
-      </div>
-
-      <div className="root-domain-banner">
-        {rootDomain}
       </div>
     </div>
   );

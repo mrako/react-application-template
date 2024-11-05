@@ -64,6 +64,21 @@
   text-overflow: ellipsis;
 }
 
+
+.voting-qr-code {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 20%; /* QR code takes up 30% of the page width */
+  height: auto;
+}
+
+.voting-qr-code .qr-code {
+  width: 100%; /* Ensures QR code fills the 30% width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
 /* Mobile view: stack sections top and bottom */
 @media (max-width: 768px) {
   .results-bar {
@@ -71,6 +86,10 @@
   }
 
   .root-domain-banner {
+    display: none;
+  }
+
+  .qr-code {
     display: none;
   }
 }

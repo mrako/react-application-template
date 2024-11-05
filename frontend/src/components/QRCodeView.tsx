@@ -15,7 +15,7 @@ const QRCodeComponent = () => {
           bgColor={"#ffd100"}
           fgColor={"#101820"}
           level={"L"}
-          className="qr-code"
+          className="qr-code-view"
         />
       </div>
     </div>
