@@ -1,6 +1,8 @@
 services:
   redis:
     image: redis:alpine
+    ports:
+      - 6379:6379
 
   db:
     image: postgres:alpine
@@ -8,6 +10,8 @@ services:
       POSTGRES_DB: tdoc
       POSTGRES_PASSWORD: tdoc
       POSTGRES_USER: tdoc
+    ports:
+      - 5432:5432
 
   backend:
     build: backend
