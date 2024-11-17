@@ -21,6 +21,10 @@ export const list = async (ctx: any) => {
   ctx.body = votes;
 };
 
+export const count = async (ctx: any) => {
+  ctx.body = await countVotes();
+};
+
 export const create = async (ctx: any) => {
   const { option } = ctx.request.body;
   const newVote = await prisma.vote.create({
