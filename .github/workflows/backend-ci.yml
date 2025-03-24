@@ -1,0 +1,48 @@
+name: Backend Continuous Integration
+
+on: push
+
+jobs:
+  build:
+    name: Backend Continuous Integration
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    defaults:
+      run:
+        working-directory: backend
+
+    env:
+      DATABASE_URL: postgres://votes:votes@localhost:5432/votes
+
+    services:
+      db:
+        image: postgres:alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: votes
+          POSTGRES_USER: votes
+          POSTGRES_PASSWORD: votes
+        options: >-
+          --health-cmd="pg_isready -U votes -d votes"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run lint
+      - name: wait postgres
+        run: |
+          until nc -z localhost 5432; do
+            echo "Waiting for Postgres..."
+            sleep 2
+          done
+      - run: npm run db:migrate
+      - run: npm test
