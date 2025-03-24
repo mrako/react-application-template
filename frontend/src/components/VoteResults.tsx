@@ -5,7 +5,7 @@ import { QRCodeSVG } from 'qrcode.react';
 
 import './VoteResults.css';
 
-const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
+const ENDPOINT = import.meta.env.VITE_ENDPOINT || 'http://localhost:9000';
 
 interface VoteCounts {
   [option: string]: number;

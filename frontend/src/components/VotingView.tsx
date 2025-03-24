@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './VotingView.css';
 
-const ENDPOINT = process.env.REACT_APP_API_URL || 'http://localhost:9000';
+const ENDPOINT = import.meta.env.VITE_ENDPOINT || 'http://localhost:9000';
 
 const VotingView: React.FC = () => {
   const navigate = useNavigate();
