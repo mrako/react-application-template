@@ -16,7 +16,7 @@ const VoteResults: React.FC = () => {
   const currentDomain = window.location.origin;
 
   useEffect(() => {
-    const socket = io(`${ENDPOINT}`, { transports: ['websocket'] });
+    const socket = io(`${ENDPOINT}`, { transports: ['websocket', 'polling'] });
 
     socket.on('votesList', (data: any) => {
       setVoteCounts(data);
