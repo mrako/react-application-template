@@ -7,9 +7,9 @@ services:
   db:
     image: postgres:alpine
     environment:
-      POSTGRES_DB: tdoc
-      POSTGRES_PASSWORD: tdoc
-      POSTGRES_USER: tdoc
+      POSTGRES_DB: votes
+      POSTGRES_PASSWORD: votes
+      POSTGRES_USER: votes
     ports:
       - 5432:5432
 
@@ -17,7 +17,7 @@ services:
     build: backend
     environment:
       REDIS_URL: redis://redis:6379
-      DATABASE_URL: postgres://tdoc:tdoc@db/tdoc
+      DATABASE_URL: postgres://votes:votes@db/votes
     ports:
       - 9000:9000
     depends_on:
