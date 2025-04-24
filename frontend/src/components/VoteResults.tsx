@@ -48,7 +48,7 @@ const VoteResults: React.FC = () => {
           className="results-section option-one"
           style={{ flex: `${optionOnePercentage} 1 0%` }}
         >
-          <h3>We use AI for UAT</h3>
+          <h3>We use Atlassian AI</h3>
           <p>{optionOnePercentage.toFixed(1)}% ({voteCounts['1'] || 0} votes)</p>
         </div>
 
@@ -56,7 +56,7 @@ const VoteResults: React.FC = () => {
           className="results-section option-two"
           style={{ flex: `${optionTwoPercentage} 1 0%` }}
         >
-          <h3>We don't use AI for UAT yet</h3>
+          <h3>We don't use Atlassian AI yet</h3>
           <p>{optionTwoPercentage.toFixed(1)}% ({voteCounts['2'] || 0} votes)</p>
         </div>
       </div>
